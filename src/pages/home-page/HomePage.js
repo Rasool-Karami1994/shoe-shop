@@ -13,7 +13,10 @@ const HomePage = () => {
               alt="product-img"
             ></img>
             <p className="product-name">{product.name}</p>
-            <p className="product-price">${product.price}</p>
+            <div className="price-container">
+              <p className="product-price">${product.offPrice}</p>
+              <p className="product-offprice">${product.price}</p>
+            </div>
             <button className="products-btn">Add to cart</button>
           </div>
         </div>
