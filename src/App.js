@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import "./App.css";
+import LayOut from "./layout/LayOut";
+import { Routes, Route } from "react-router-dom";
+import routes from "./routes";
+import { ToastContainer } from "react-toastify";
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LayOut>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route {...route} key={index}></Route>
+          ))}
+        </Routes>
+      </LayOut>
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default App;
