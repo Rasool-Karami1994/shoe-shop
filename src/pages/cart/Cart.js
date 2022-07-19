@@ -1,4 +1,12 @@
+
+import "./Cart.css";
+
 const Cart = () => {
-  return <div>hello world</div>;
+ 
+  return (
+    <div>
+     
+    </div>
+  );
 };
 export default Cart;

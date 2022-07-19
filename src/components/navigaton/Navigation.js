@@ -10,14 +10,12 @@ const Navigation = () => {
     <nav>
       <img className="logo" alt="logo" src={logo}></img>
       <ul>
-        {/* <li>
+        <li>
           <NavLink
             to="/"
-            className={(navData) => (navData.isActive ? "activeLink" : "")}
-          >
-            Home
-          </NavLink>
-        </li> */}
+            // className={(navData) => (navData.isActive ? "activeLink" : "")}
+          ></NavLink>
+        </li>
         <li>
           <NavLink to="/cart">
             <span>
