@@ -4,6 +4,8 @@ import "./HomePage.css";
 import * as data from "../../data";
 import hero from "../../assets/img/nike-just-do-it.jpg";
 import { useMediaPredicate } from "react-media-hook";
+import { toast } from "react-toastify";
+
 const HomePage = () => {
   const smallerThan450 = useMediaPredicate("(max-width: 450px)");
 
@@ -18,6 +20,11 @@ const HomePage = () => {
       url: "https://s6.uupload.ir/files/usama-akram-s-gyabqtoxk-unsplash_d0o0.jpg",
     },
   ];
+  const addToCart = (product) => {
+    console.log(product);
+    toast.success(`${product.name} added to Cart!`);
+    
+  };
 
   return (
     <div className="home-page-container">
@@ -33,7 +40,7 @@ const HomePage = () => {
       </div>
       <section className="products-list-container">
         {data.products.map((product) => (
-          <div className="product-container">
+          <div className="product-container" key={product.name}>
             <span className="products-off">${product.discount}</span>
             <div className="product-card">
               <img
@@ -46,7 +53,13 @@ const HomePage = () => {
                 <p className="product-price">${product.offPrice}</p>
                 <p className="product-offprice">${product.price}</p>
               </div>
-              <button className="products-btn">Add to cart</button>
+              <button
+                className="products-btn"
+                onClick={() => addToCart(product)}
+              >
+                {" "}
+                Add to cart
+              </button>
             </div>
           </div>
         ))}
