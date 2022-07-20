@@ -5,6 +5,7 @@ const LayOut = ({ children }) => {
   return (
     <div>
       <Header />
+
       {children}
       <Footer />
     </div>

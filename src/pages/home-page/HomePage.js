@@ -5,6 +5,7 @@ import * as data from "../../data";
 import hero from "../../assets/img/nike-just-do-it.jpg";
 import { useMediaPredicate } from "react-media-hook";
 import { toast } from "react-toastify";
+import { useCartContextActions } from "../../context/CartProvider";
 
 const HomePage = () => {
   const smallerThan450 = useMediaPredicate("(max-width: 450px)");
@@ -20,10 +21,11 @@ const HomePage = () => {
       url: "https://s6.uupload.ir/files/usama-akram-s-gyabqtoxk-unsplash_d0o0.jpg",
     },
   ];
+  const dispatch = useCartContextActions();
   const addToCart = (product) => {
-    console.log(product);
+    dispatch({ type: "ADD_TO_CART", payload: product });
+    // console.log(product);
     toast.success(`${product.name} added to Cart!`);
-    
   };
 
   return (
