@@ -134,11 +134,13 @@
   font-size: 16px;
   padding: 10px;
 }
-.cart-summeery-text {
-  border-bottom: 1px solid var(--second-color);
-  padding-bottom: 10px;
+.cart-summery-text {
+  border-top: 1px solid var(--second-color);
 }
-.cart-summery button {
+.chekout-link {
+  width: 100%;
+}
+.checkout-btn {
   background-color: var(--main-color);
   color: #fff;
   border-radius: 8px;
@@ -146,6 +148,10 @@
   height: 60px;
   padding: 10px;
   margin-top: 40px;
+  cursor: pointer;
+}
+.checkout-btn:hover {
+  transform: scale(0.97);
 }
 
 @media only screen and (max-width: 1100px) {

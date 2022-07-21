@@ -1,11 +1,14 @@
-import { useCartContext } from "../../context/CartProvider";
+import {
+  useCartContext,
+  useCartContextActions,
+} from "../../context/CartProvider";
 import "./Cart.css";
 import cartEmptyImg from "../../assets/img/cart-empty2.PNG";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -14,7 +17,31 @@ const Cart = () => {
     navigate("/");
   };
   //destructure cart from datas recived by useCartContext hook
-  const { cart } = useCartContext();
+  const { cart, total } = useCartContext();
+  const dispatch = useCartContextActions();
+  const incrementHandler = (cartItem) => {
+    console.log(cartItem);
+    dispatch({ type: "ADD_TO_CART", payload: cartItem });
+  };
+  const decrementHandler = (cartItem) => {
+    console.log(cartItem);
+    dispatch({ type: "REDUCE_QUANTITY", payload: cartItem });
+  };
+  const removeCartItemHandler = (cartItem) => {
+    console.log(cartItem);
+    dispatch({ type: "REMOVE_CART_ITEM", payload: cartItem });
+  };
+
+  /*using forEach method for calculating summery price element*/
+  let summeryPriceValue = 0;
+  cart.forEach((element) => {
+    summeryPriceValue += element.price * element.quantity;
+  });
+  /*using forEach method for calculating summery price element*/
+  let summerydiscountValue = 0;
+  cart.forEach((element) => {
+    summerydiscountValue += element.discount * element.quantity;
+  });
 
   if (!cart.length) {
     return (
@@ -58,7 +85,7 @@ const Cart = () => {
             </p>
           </div>
           {cart.map((item) => (
-            <div className="cart-item">
+            <div className="cart-item" key={item.id}>
               <img
                 src={item.image}
                 alt={item.name}
@@ -69,6 +96,7 @@ const Cart = () => {
                 <div className="cart-item-control">
                   <div className="cart-item-qnt-control">
                     <button
+                      onClick={() => decrementHandler(item)}
                       className={
                         item.quantity === 1
                           ? "cart-control-red"
@@ -78,11 +106,17 @@ const Cart = () => {
                       <MdKeyboardArrowDown />
                     </button>
                     <p>{item.quantity}</p>
-                    <button className="cart-control-icons">
+                    <button
+                      className="cart-control-icons"
+                      onClick={() => incrementHandler(item)}
+                    >
                       <MdKeyboardArrowUp />
                     </button>
                   </div>
-                  <button className="cart-control-red">
+                  <button
+                    className="cart-control-red"
+                    onClick={() => removeCartItemHandler(item)}
+                  >
                     <MdDelete />
                   </button>
                 </div>
@@ -98,17 +132,20 @@ const Cart = () => {
             <h4>Summary</h4>
             <div>
               <p>Price</p>
-              <span>$ 0</span>
+              <span>$ {summeryPriceValue}</span>
             </div>
             <div>
-              <p>off</p>
-              <span>$ 0</span>
+              <p>Discount</p>
+              <span>$ {summerydiscountValue}</span>
             </div>
-            <div className="cart-summeery-text">
+            <div className="cart-summery-text">
               <p>Total</p>
-              <span>$ 0</span>
+              <span>$ {total}</span>
             </div>
-            <button>Checkout</button>
+
+            <Link className="chekout-link" to="/checkout">
+              <button className="checkout-btn">Checkout</button>
+            </Link>
           </div>
         </section>
       </div>
@@ -117,37 +154,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-//   <section className="cart-items-list-container" key={item.id}>
-//     <div className="cart-items">
-//       <img src={item.image} alt={item.name}></img>
-//       <div>
-//         <p>{item.name}</p>
-//         <div>
-//           <button>+</button>
-//           <p>{item.quantity}</p>
-//           <button>-</button>
-//         </div>
-//         <button>delete</button>
-//       </div>
-//       <p>{item.offPrice}</p>
-//     </div>
-//   </section>
-
-//   <section className="cart-summery-container">
-//     <div className="Cart-summery">
-//       <h4>Summary</h4>
-//       <p>
-//         Price <span>{item.price}</span>
-//       </p>
-//       <p>
-//         {" "}
-//         Off <span>{item.off}</span>
-//       </p>
-//       <p>
-//         Total <span>{item.offPrice}</span>
-//       </p>
-//       <button>Checkout</button>
-//     </div>
-//   </section>
-// </> */

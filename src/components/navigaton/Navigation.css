@@ -45,3 +45,19 @@ li a {
     margin-left: 10px;
   }
 }
+
+.cart-qnt {
+  background-color: #c82d2d;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  position: relative;
+  left: 15%;
+  top: -20%;
+}
