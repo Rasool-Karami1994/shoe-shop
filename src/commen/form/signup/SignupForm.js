@@ -43,7 +43,7 @@ const SignupForm = () => {
   return (
     <div className="page-container">
       <form onSubmit={formik.handleSubmit}>
-        <h2>Sign Up</h2>
+        <h2 className="form-h2">Sign Up</h2>
         <Input label="Name" name="name" formik={formik} />
         <Input label="Email" name="email" formik={formik} type="email" />
         <Input
@@ -57,12 +57,12 @@ const SignupForm = () => {
         <button
           type="submit"
           disabled={!formik.isValid}
-          className={!formik.isValid ? "disabeled-btn" : ""}
+          className={!formik.isValid ? "disabeled-btn" : "form-btn"}
         >
           Create Account
         </button>
         <Link to="/login">
-          <p>
+          <p className="form-text">
             {" "}
             Already <span>login</span>?
           </p>
