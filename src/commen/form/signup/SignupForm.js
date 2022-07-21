@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import Input from "../input/Input";
 import "./SignupForm.css";
 import BooleanCheckBox from "../input/BooleanCheckBox";
+import { Link } from "react-router-dom";
 const initialValues = {
   id: 1,
   name: "",
@@ -60,6 +61,12 @@ const SignupForm = () => {
         >
           Create Account
         </button>
+        <Link to="/login">
+          <p>
+            {" "}
+            Already <span>login</span>?
+          </p>
+        </Link>
       </form>
     </div>
   );
