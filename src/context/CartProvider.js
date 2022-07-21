@@ -7,6 +7,20 @@ const CartProvider = ({ children }) => {
     cart: [],
     total: 0,
   };
+  // useEffect(() => {
+  //   const savedCartItems = JSON.parse(localStorage.getItem("cart2"));
+  //   const { cart } = CartContext();
+  //   if (cart) {
+  //     cart.push(savedCartItems);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   const { cart } = CartContext();
+
+  //   localStorage.setItem("cart2", JSON.stringify(cart));
+  // }, []);
+
   const [cart, dispatch] = useReducer(CartReducer, initialValue);
   return (
     <CartContext.Provider value={cart}>

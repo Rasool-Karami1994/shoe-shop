@@ -15,7 +15,7 @@ const Cart = () => {
   };
   //destructure cart from datas recived by useCartContext hook
   const { cart } = useCartContext();
-  // console.log(cart);
+
   if (!cart.length) {
     return (
       <div className="cart-empty-container">
@@ -87,7 +87,9 @@ const Cart = () => {
                   </button>
                 </div>
               </div>
-              <p className="cart-item-price">$ {item.offPrice}</p>
+              <p className="cart-item-price">
+                $ {item.offPrice * item.quantity}
+              </p>
             </div>
           ))}
         </section>
