@@ -8,6 +8,7 @@ import { signupUser } from "../../../services/signupUser";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuthContextAction } from "../../../context/AuthProvider";
 
 const initialValues = {
   name: "",
@@ -36,6 +37,7 @@ const validationSchema = Yup.object({
 const SignupForm = () => {
   const [error, setError] = useState();
   const navigate = useNavigate();
+  const setUser = useAuthContextAction();
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -49,6 +51,8 @@ const SignupForm = () => {
     try {
       const { data } = await signupUser(userData);
       console.log(data);
+      setUser(data);
+      localStorage.setItem("auth", JSON.stringify(data));
       navigate(-1);
     } catch (error) {
       console.log(error.response.data.message);

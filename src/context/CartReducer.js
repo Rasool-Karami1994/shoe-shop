@@ -8,7 +8,6 @@ const CartReducer = (state, action) => {
       );
       if (index < 0) {
         cartProducts.push({ ...action.payload, quantity: 1 });
-        // updatedCart + action.payload.offPrice;
       } else {
         const updatedCart = { ...cartProducts[index] };
         updatedCart.quantity++;
@@ -21,6 +20,7 @@ const CartReducer = (state, action) => {
         total: state.total + action.payload.offPrice,
       };
     }
+
     case "REDUCE_QUANTITY": {
       const cartProducts = [...state.cart];
       const index = cartProducts.findIndex(

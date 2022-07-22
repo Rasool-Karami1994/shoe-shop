@@ -10,12 +10,14 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Cart = () => {
   const navigate = useNavigate();
   const redirector = () => {
     navigate("/");
   };
+  
   //destructure cart from datas recived by useCartContext hook
   const { cart, total } = useCartContext();
   console.log(cart);
@@ -44,6 +46,15 @@ const Cart = () => {
   cart.forEach((element) => {
     summerydiscountValue += element.discount * element.quantity;
   });
+
+  useEffect(() => {
+    if (!cart) {
+      const savedCartItems = JSON.parse(localStorage.getItem("cart2"));
+      cart.push(savedCartItems);
+    } else {
+      localStorage.setItem("cart2", JSON.stringify(cart));
+    }
+  }, [cart]);
 
   if (!cart.length) {
     return (

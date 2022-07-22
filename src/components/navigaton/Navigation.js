@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import logo from "../../assets/img/logo.jpg";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { useCartContext } from "../../context/CartProvider";
+import { useAuthContext } from "../../context/AuthProvider";
+import { FiLogOut } from "react-icons/fi";
 const Navigation = () => {
+  const user = useAuthContext();
   const { cart } = useCartContext();
+  console.log(user);
+  const logoutHandler = () => {
+    console.log("hello");
+    localStorage.setItem("auth", JSON.stringify(false));
+  };
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <nav>
       <img className="logo" alt="logo" src={logo}></img>
@@ -22,7 +33,13 @@ const Navigation = () => {
         <li>
           <NavLink to="/signup">
             <span>
-              <FiLogIn />
+              {user ? (
+                <button onClick={() => logoutHandler()}>
+                  <FiLogOut />
+                </button>
+              ) : (
+                <FiLogIn />
+              )}
             </span>
           </NavLink>{" "}
         </li>

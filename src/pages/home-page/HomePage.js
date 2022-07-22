@@ -31,14 +31,16 @@ const HomePage = () => {
     toast.success(`${item.name} added to Cart!`);
   };
 
-  try {
-    getProducts().then((res) => setProducts(res.data));
-  } catch (error) {
-    console.log(error);
-  }
-
   useEffect(() => {
-    getProducts();
+    if (products) {
+      return;
+    } else {
+      try {
+        getProducts().then((res) => setProducts(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }, []);
 
   return (

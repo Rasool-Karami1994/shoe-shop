@@ -5,6 +5,7 @@ import { useState } from "react";
 import { loginUser } from "../../../services/loginUser";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuthContextAction } from "../../../context/AuthProvider";
 const initialValues = {
   email: "",
   password: "",
@@ -19,7 +20,7 @@ const validationSchema = Yup.object({
 });
 const LoginForm = (props) => {
   const navigate = useNavigate();
-  console.log(props);
+  const setUser = useAuthContextAction();
   const [error, setError] = useState(null);
 
   const onSubmit = async (values) => {
@@ -32,6 +33,8 @@ const LoginForm = (props) => {
     try {
       const { data } = await loginUser(userData);
       // const name = data.name;
+      setUser(data);
+      localStorage.setItem("auth", JSON.stringify(data));
       console.log(data.name);
       setError(null);
       navigate(-2);
