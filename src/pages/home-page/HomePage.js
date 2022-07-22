@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SimpleImageSlider from "react-simple-image-slider";
 import "./HomePage.css";
-import * as data from "../../data";
+// import * as data from "../../data";
+// import axios from "axios";
 import hero from "../../assets/img/nike-just-do-it.jpg";
 import { useMediaPredicate } from "react-media-hook";
 import { toast } from "react-toastify";
 import { useCartContextActions } from "../../context/CartProvider";
+import { getProducts } from "../../services/getProducts";
 
 const HomePage = () => {
   const smallerThan450 = useMediaPredicate("(max-width: 450px)");
+  const [products, setProducts] = useState();
 
   const images = [
     {
@@ -22,11 +25,21 @@ const HomePage = () => {
     },
   ];
   const dispatch = useCartContextActions();
-  const addToCart = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
-    // console.log(product);
-    toast.success(`${product.name} added to Cart!`);
+  const addToCart = (item) => {
+    dispatch({ type: "ADD_TO_CART", payload: item });
+    // console.log(item);
+    toast.success(`${item.name} added to Cart!`);
   };
+
+  try {
+    getProducts().then((res) => setProducts(res.data));
+  } catch (error) {
+    console.log(error);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div className="home-page-container">
@@ -41,30 +54,33 @@ const HomePage = () => {
         <img className="hero" src={hero} alt="Hero-banner"></img>
       </div>
       <section className="products-list-container">
-        {data.products.map((product) => (
-          <div className="product-container" key={product.name}>
-            <span className="products-off">${product.discount}</span>
-            <div className="product-card">
-              <img
-                className="product-img"
-                src={product.image}
-                alt="product-img"
-              ></img>
-              <p className="product-name">{product.name}</p>
-              <div className="price-container">
-                <p className="product-price">${product.offPrice}</p>
-                <p className="product-offprice">${product.price}</p>
+        {!products ? (
+          <p>loading</p>
+        ) : (
+          products.map((product) => (
+            <div className="product-container" key={product.name}>
+              <span className="products-off">${product.discount}</span>
+              <div className="product-card">
+                <img
+                  className="product-img"
+                  src={product.image}
+                  alt="product-img"
+                ></img>
+                <p className="product-name">{product.name}</p>
+                <div className="price-container">
+                  <p className="product-price">${product.offPrice}</p>
+                  <p className="product-offprice">${product.price}</p>
+                </div>
+                <button
+                  className="products-btn"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to cart
+                </button>
               </div>
-              <button
-                className="products-btn"
-                onClick={() => addToCart(product)}
-              >
-                {" "}
-                Add to cart
-              </button>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </section>
       <div className="slider">
         {smallerThan450 ? (

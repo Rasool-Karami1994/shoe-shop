@@ -18,6 +18,8 @@ const Cart = () => {
   };
   //destructure cart from datas recived by useCartContext hook
   const { cart, total } = useCartContext();
+  console.log(cart);
+
   const dispatch = useCartContextActions();
   const incrementHandler = (cartItem) => {
     console.log(cartItem);
@@ -85,7 +87,7 @@ const Cart = () => {
             </p>
           </div>
           {cart.map((item) => (
-            <div className="cart-item" key={item.id}>
+            <div className="cart-item" key={item.name}>
               <img
                 src={item.image}
                 alt={item.name}

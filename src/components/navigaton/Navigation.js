@@ -20,7 +20,7 @@ const Navigation = () => {
           </NavLink>{" "}
         </li>
         <li>
-          <NavLink to="/cart">
+          <NavLink to="/signup">
             <span>
               <FiLogIn />
             </span>

@@ -2,15 +2,19 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../input/Input";
 import "./SignupForm.css";
-import BooleanCheckBox from "../input/BooleanCheckBox";
+// import BooleanCheckBox from "../input/BooleanCheckBox";
 import { Link } from "react-router-dom";
+import { signupUser } from "../../../services/signupUser";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const initialValues = {
-  id: 1,
   name: "",
   email: "",
   password: "",
   phoneNumber: "",
-  terms: false,
+  // terms: false,
 };
 
 const validationSchema = Yup.object({
@@ -24,15 +28,35 @@ const validationSchema = Yup.object({
   phoneNumber: Yup.string()
     .required("Phone Number is required!")
     .matches(/^[0-9]{11}$/, "Invalid phone number"),
-  terms: Yup.boolean()
-    .required("The terms and conditions must be accepted.")
-    .oneOf([true], "The terms and conditions must be accepted."),
+  // terms: Yup.boolean()
+  //   .required("The terms and conditions must be accepted.")
+  //   .oneOf([true], "The terms and conditions must be accepted."),
 });
-const onSubmit = (values) => {
-  console.log(values);
-};
 
 const SignupForm = () => {
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    console.log(values);
+    const { name, email, phoneNumber, password } = values;
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+    try {
+      const { data } = await signupUser(userData);
+      console.log(data);
+      navigate(-1);
+    } catch (error) {
+      console.log(error.response.data.message);
+      setError(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
+    console.log(error);
+  };
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit,
@@ -40,6 +64,7 @@ const SignupForm = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
+
   return (
     <div className="page-container">
       <form onSubmit={formik.handleSubmit}>
@@ -53,7 +78,7 @@ const SignupForm = () => {
           type="tel"
         />
         <Input label="Password" name="password" formik={formik} />
-        <BooleanCheckBox formik={formik} />
+        {/* <BooleanCheckBox formik={formik} /> */}
         <button
           type="submit"
           disabled={!formik.isValid}
