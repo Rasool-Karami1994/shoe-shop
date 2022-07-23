@@ -40,7 +40,6 @@ const SignupForm = () => {
   const setUser = useAuthContextAction();
 
   const onSubmit = async (values) => {
-    console.log(values);
     const { name, email, phoneNumber, password } = values;
     const userData = {
       name,
