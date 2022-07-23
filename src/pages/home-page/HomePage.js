@@ -23,6 +23,12 @@ const HomePage = () => {
     {
       url: "https://s6.uupload.ir/files/usama-akram-s-gyabqtoxk-unsplash_d0o0.jpg",
     },
+    {
+      url: "https://s6.uupload.ir/files/giorgio-trovato-lv_4qm5gf9c-unsplash_kkri.jpg",
+    },
+    {
+      url: "https://s6.uupload.ir/files/giorgio-trovato-lv_4qm5gf9c-unsplddash_alq.jpg",
+    },
   ];
   const dispatch = useCartContextActions();
   const addToCart = (product) => {
@@ -116,7 +122,7 @@ const HomePage = () => {
         ) : (
           <SimpleImageSlider
             width={1200}
-            height={520}
+            height={640}
             images={images}
             showBullets={true}
             showNavs={true}
