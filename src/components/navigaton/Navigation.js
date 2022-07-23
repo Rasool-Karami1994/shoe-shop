@@ -5,19 +5,28 @@ import logo from "../../assets/img/logo.jpg";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { useCartContext } from "../../context/CartProvider";
-import { useAuthContext } from "../../context/AuthProvider";
+import {
+  useAuthContext,
+  useAuthContextAction,
+} from "../../context/AuthProvider";
 import { FiLogOut } from "react-icons/fi";
+import { toast } from "react-toastify";
 const Navigation = () => {
   const user = useAuthContext();
   const { cart } = useCartContext();
-  console.log(user);
+  const setUser = useAuthContextAction();
+  // console.log(user);
+
   const logoutHandler = () => {
-    console.log("hello");
+    setUser(false);
     localStorage.setItem("auth", JSON.stringify(false));
+    toast.success(`${user.name} loged out!`);
   };
+
   useEffect(() => {
     console.log(user);
   }, [user]);
+
   return (
     <nav>
       <img className="logo" alt="logo" src={logo}></img>
@@ -30,19 +39,25 @@ const Navigation = () => {
             <span className="cart-qnt">{cart.length}</span>
           </NavLink>{" "}
         </li>
-        <li>
-          <NavLink to="/signup">
-            <span>
-              {user ? (
-                <button onClick={() => logoutHandler()}>
+        {user ? (
+          <li>
+            <NavLink to="/">
+              <button className="logout-btn" onClick={() => logoutHandler()}>
+                <span>
                   <FiLogOut />
-                </button>
-              ) : (
+                </span>
+              </button>
+            </NavLink>
+          </li>
+        ) : (
+          <li>
+            <NavLink to="/signup">
+              <span>
                 <FiLogIn />
-              )}
-            </span>
-          </NavLink>{" "}
-        </li>
+              </span>
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

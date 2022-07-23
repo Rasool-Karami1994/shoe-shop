@@ -38,6 +38,7 @@ const LoginForm = (props) => {
       console.log(data.name);
       setError(null);
       navigate(-2);
+      toast.success(`Welcome back ${data.name}!`);
     } catch (error) {
       console.log(error.response.data.message);
       setError(error.response.data.message);

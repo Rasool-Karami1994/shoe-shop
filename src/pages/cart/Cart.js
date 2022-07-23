@@ -10,14 +10,14 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const Cart = () => {
   const navigate = useNavigate();
   const redirector = () => {
     navigate("/");
   };
-  
+
   //destructure cart from datas recived by useCartContext hook
   const { cart, total } = useCartContext();
   console.log(cart);
@@ -47,14 +47,14 @@ const Cart = () => {
     summerydiscountValue += element.discount * element.quantity;
   });
 
-  useEffect(() => {
-    if (!cart) {
-      const savedCartItems = JSON.parse(localStorage.getItem("cart2"));
-      cart.push(savedCartItems);
-    } else {
-      localStorage.setItem("cart2", JSON.stringify(cart));
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   if (!cart) {
+  //     const savedCartItems = JSON.parse(localStorage.getItem("cart2"));
+  //     cart.push(savedCartItems);
+  //   } else {
+  //     localStorage.setItem("cart2", JSON.stringify(cart));
+  //   }
+  // }, [cart]);
 
   if (!cart.length) {
     return (
@@ -87,13 +87,13 @@ const Cart = () => {
           <div className="cart-Delivery-box">
             <h4>Free Delivery for Members</h4>
             <p>
-              Become a member to get fast and free delivery{" "}
+              Become a member to get fast and free delivery.{" "}
               <span>
-                <a href="/">JoinUs</a>
+                <a href="/signup">JoinUs</a>
               </span>{" "}
               or{" "}
               <span>
-                <a href="/">SignIn</a>
+                <a href="/login">SignIn</a>
               </span>
             </p>
           </div>

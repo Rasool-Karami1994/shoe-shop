@@ -27,6 +27,13 @@ li a {
   text-decoration: none;
   color: #272e38;
 }
+.logout-btn {
+  border: none;
+  outline: none;
+  font-size: 25px;
+  background-color: #fff;
+  cursor: pointer;
+}
 
 .logo {
   width: 120px;

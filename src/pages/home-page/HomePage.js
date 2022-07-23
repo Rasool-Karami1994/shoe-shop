@@ -25,10 +25,10 @@ const HomePage = () => {
     },
   ];
   const dispatch = useCartContextActions();
-  const addToCart = (item) => {
-    dispatch({ type: "ADD_TO_CART", payload: item });
+  const addToCart = (product) => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
     // console.log(item);
-    toast.success(`${item.name} added to Cart!`);
+    toast.success(`${product.name} added to Cart!`);
   };
 
   useEffect(() => {

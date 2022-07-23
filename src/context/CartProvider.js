@@ -18,6 +18,7 @@ const CartProvider = ({ children }) => {
   // }, [initialValue.cart]);
 
   const [cart, dispatch] = useReducer(CartReducer, initialValue);
+  console.log(cart);
   return (
     <CartContext.Provider value={cart}>
       <CartContextDispatcher.Provider value={dispatch}>

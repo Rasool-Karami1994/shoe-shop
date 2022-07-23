@@ -53,6 +53,8 @@ const SignupForm = () => {
       console.log(data);
       setUser(data);
       localStorage.setItem("auth", JSON.stringify(data));
+      toast.success(`Welcome ${data.name}!`);
+
       navigate(-1);
     } catch (error) {
       console.log(error.response.data.message);
