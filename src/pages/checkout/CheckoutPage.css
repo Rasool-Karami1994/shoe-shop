@@ -99,6 +99,12 @@
 .place-order-btn:hover {
   transform: scale(0.97);
 }
+.chekout-card-text {
+  position: relative;
+  margin-top: 10px;
+  left: -12%;
+  padding: 10px;
+}
 @media only screen and (max-width: 500px) {
   .checkout-card {
     border: 1px solid var(--second-color);
@@ -111,5 +117,10 @@
     justify-content: flex-start;
     padding: 15px;
     align-items: center;
+  }
+  .chekout-card-text {
+    position: relative;
+    left: 0;
+    padding: 10px;
   }
 }

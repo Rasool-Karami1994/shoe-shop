@@ -22,6 +22,7 @@ const CheckoutPage = () => {
             <IoIosArrowBack />
           </button>
           <div className="checkout-card">
+            <h4 className="chekout-card-text">{`Dear ${user.name}, this is your shoping detailes:`}</h4>
             <div className="checkout-content-first">
               {cart.map((item) => (
                 <div className="checkout-cart-item" key={item.id}>
