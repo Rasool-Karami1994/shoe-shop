@@ -47,14 +47,7 @@ const Cart = () => {
     summerydiscountValue += element.discount * element.quantity;
   });
 
-  // useEffect(() => {
-  //   if (!cart) {
-  //     const savedCartItems = JSON.parse(localStorage.getItem("cart2"));
-  //     cart.push(savedCartItems);
-  //   } else {
-  //     localStorage.setItem("cart2", JSON.stringify(cart));
-  //   }
-  // }, [cart]);
+  
 
   if (!cart.length) {
     return (

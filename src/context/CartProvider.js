@@ -8,15 +8,6 @@ const CartProvider = ({ children }) => {
     total: 0,
   };
 
-  // useEffect(() => {
-  //   const cart = JSON.parse(localStorage.getItem("cart")) || false;
-  //   initialValue.cart = cart;
-  // }, []);
-  // useEffect(() => {
-  //   const cart = JSON.stringify(initialValue.cart);
-  //   localStorage.setItem(cart);
-  // }, [initialValue.cart]);
-
   const [cart, dispatch] = useReducer(CartReducer, initialValue);
   console.log(cart);
   return (

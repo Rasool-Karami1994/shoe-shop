@@ -3,14 +3,13 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import logo from "../../assets/img/logo.jpg";
 import { FaShoppingCart } from "react-icons/fa";
-import { FiLogIn } from "react-icons/fi";
+import { BiUserCircle } from "react-icons/bi";
 import { useCartContext } from "../../context/CartProvider";
 import {
   useAuthContext,
   useAuthContextAction,
 } from "../../context/AuthProvider";
 import { FiLogOut } from "react-icons/fi";
-import { toast } from "react-toastify";
 const Navigation = () => {
   const user = useAuthContext();
   const { cart } = useCartContext();
@@ -20,7 +19,6 @@ const Navigation = () => {
   const logoutHandler = () => {
     setUser(false);
     localStorage.setItem("auth", JSON.stringify(false));
-    toast.success(`${user.name} loged out!`);
   };
 
   useEffect(() => {
@@ -54,13 +52,13 @@ const Navigation = () => {
             {user ? (
               <NavLink to="/logout">
                 <span>
-                  <FiLogIn />
+                  <BiUserCircle />
                 </span>
               </NavLink>
             ) : (
               <NavLink to="/signup">
                 <span>
-                  <FiLogIn />
+                  <BiUserCircle />
                 </span>
               </NavLink>
             )}

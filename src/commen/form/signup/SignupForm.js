@@ -9,6 +9,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuthContextAction } from "../../../context/AuthProvider";
+import { IoIosArrowBack } from "react-icons/io";
 
 const initialValues = {
   name: "",
@@ -38,7 +39,9 @@ const SignupForm = () => {
   const [error, setError] = useState();
   const navigate = useNavigate();
   const setUser = useAuthContextAction();
-
+  const redirector = () => {
+    navigate("/");
+  };
   const onSubmit = async (values) => {
     const { name, email, phoneNumber, password } = values;
     const userData = {
@@ -52,7 +55,6 @@ const SignupForm = () => {
       console.log(data);
       setUser(data);
       localStorage.setItem("auth", JSON.stringify(data));
-      toast.success(`Welcome ${data.name}!`);
 
       navigate(-1);
     } catch (error) {
@@ -72,6 +74,10 @@ const SignupForm = () => {
 
   return (
     <div className="page-container">
+      <button onClick={redirector} className="back-button">
+        <IoIosArrowBack />
+      </button>
+
       <form onSubmit={formik.handleSubmit}>
         <h2 className="form-h2">Sign Up</h2>
         <Input label="Name" name="name" formik={formik} />

@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import SimpleImageSlider from "react-simple-image-slider";
 import "./HomePage.css";
 import * as data from "../../data";
-// import axios from "axios";
 import hero from "../../assets/img/nike-just-do-it.jpg";
 import { useMediaPredicate } from "react-media-hook";
-import { toast } from "react-toastify";
 import { useCartContextActions } from "../../context/CartProvider";
 import { getProducts } from "../../services/getProducts";
 
 const HomePage = () => {
   const smallerThan450 = useMediaPredicate("(max-width: 450px)");
   const [products, setProducts] = useState();
-  console.log(data.products);
   const images = [
     {
       url: "https://s6.uupload.ir/files/imani-bahati-lxvxpa1lovm-unsplash_fo31.jpg",
@@ -33,8 +30,6 @@ const HomePage = () => {
   const dispatch = useCartContextActions();
   const addToCart = (product) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
-    // console.log(item);
-    toast.success(`${product.name} added to Cart!`);
   };
 
   useEffect(() => {
@@ -113,7 +108,7 @@ const HomePage = () => {
       <div className="slider">
         {smallerThan450 ? (
           <SimpleImageSlider
-            width={300}
+            width="70%"
             height={200}
             images={images}
             showBullets={true}
@@ -121,8 +116,8 @@ const HomePage = () => {
           />
         ) : (
           <SimpleImageSlider
-            width={1200}
-            height={640}
+            width="70%"
+            height={500}
             images={images}
             showBullets={true}
             showNavs={true}
